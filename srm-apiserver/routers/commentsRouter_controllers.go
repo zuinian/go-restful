@@ -65,9 +65,49 @@ func init() {
 
 	beego.GlobalControllerRouter["srm/srm-apiserver/controllers:SchoolController"] = append(beego.GlobalControllerRouter["srm/srm-apiserver/controllers:SchoolController"],
 		beego.ControllerComments{
+			Method: "StudentsBySchoolGet",
+			Router: `/:schoolName/students`,
+			AllowHTTPMethods: []string{"get"},
+			MethodParams: param.Make(),
+			Params: nil})
+
+	beego.GlobalControllerRouter["srm/srm-apiserver/controllers:SchoolController"] = append(beego.GlobalControllerRouter["srm/srm-apiserver/controllers:SchoolController"],
+		beego.ControllerComments{
 			Method: "StudentPost",
 			Router: `/:schoolName/students`,
 			AllowHTTPMethods: []string{"post"},
+			MethodParams: param.Make(),
+			Params: nil})
+
+	beego.GlobalControllerRouter["srm/srm-apiserver/controllers:SchoolController"] = append(beego.GlobalControllerRouter["srm/srm-apiserver/controllers:SchoolController"],
+		beego.ControllerComments{
+			Method: "StudentPut",
+			Router: `/:schoolName/students/:studentName`,
+			AllowHTTPMethods: []string{"put"},
+			MethodParams: param.Make(),
+			Params: nil})
+
+	beego.GlobalControllerRouter["srm/srm-apiserver/controllers:SchoolController"] = append(beego.GlobalControllerRouter["srm/srm-apiserver/controllers:SchoolController"],
+		beego.ControllerComments{
+			Method: "StudentGet",
+			Router: `/:schoolName/students/:studentName`,
+			AllowHTTPMethods: []string{"Get"},
+			MethodParams: param.Make(),
+			Params: nil})
+
+	beego.GlobalControllerRouter["srm/srm-apiserver/controllers:SchoolController"] = append(beego.GlobalControllerRouter["srm/srm-apiserver/controllers:SchoolController"],
+		beego.ControllerComments{
+			Method: "StudentDelete",
+			Router: `/:schoolName/students/:studentName`,
+			AllowHTTPMethods: []string{"Delete"},
+			MethodParams: param.Make(),
+			Params: nil})
+
+	beego.GlobalControllerRouter["srm/srm-apiserver/controllers:SchoolController"] = append(beego.GlobalControllerRouter["srm/srm-apiserver/controllers:SchoolController"],
+		beego.ControllerComments{
+			Method: "StudentTransfer",
+			Router: `/:schoolNameOld/students/:studentName/:schoolNameNew`,
+			AllowHTTPMethods: []string{"Put"},
 			MethodParams: param.Make(),
 			Params: nil})
 

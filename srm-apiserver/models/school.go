@@ -10,7 +10,7 @@ var (
 func init() {
 	SchoolList = make(map[string]*School)
 	s := School{"xiada","siming","12345"}
-	SchoolList["0"] = &s
+	SchoolList["xiada"] = &s
 }
 
 
@@ -21,6 +21,7 @@ type School struct {
 }
 
 func AddSchool(s School) string {
+	SchoolList[s.Name] = &s
 	return s.Name
 }
 

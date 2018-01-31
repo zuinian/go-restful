@@ -7,7 +7,7 @@ var (
 func init() {
 	StudentList = make(map[string]*Student)
 	s := Student{"xiaoming","one", "one"}
-	StudentList["0"] = &s
+	StudentList["xiaoming"] = &s
 }
 
 type Student struct {
@@ -16,11 +16,37 @@ type Student struct {
 	Class string
 }
 
-func AddStudent(s Student) string {
+// 添加学生
+func StudentAdd(s Student) string {
 	StudentList[s.Name] = &s
 	return s.Name
 }
 
-func GetAllStudents() map[string]*Student {
+// 查询所有学生
+func StudentsAllGet() map[string]*Student {
 	return StudentList
 }
+
+// 查询指定学生
+func StudentGet(studentName string) Student {
+	return *StudentList[studentName]
+}
+
+// 变更学生信息
+func StudentPut(s Student) bool {
+	if StudentList[s.Name] == nil {
+		return false
+	}
+	StudentList[s.Name] = &s
+	return true
+}
+
+// 删除学生信息
+func StudentDelete(studentName string) bool {
+	if StudentList[studentName] == nil {
+		return false
+	}
+	delete(StudentList, studentName)
+	return true
+}
+

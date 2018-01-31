@@ -30,11 +30,6 @@ func init() {
 				&controllers.SchoolController{},
 			),
 		),
-		beego.NSNamespace("/students",
-			beego.NSInclude(
-				&controllers.StudentController{},
-			),
-		),
 	)
 	beego.AddNamespace(ns)
 }
