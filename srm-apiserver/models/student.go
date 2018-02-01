@@ -6,14 +6,14 @@ var (
 
 func init() {
 	StudentList = make(map[string]*Student)
-	s := Student{"xiaoming","one", "one"}
+	s := Student{"xiaoming","one", 18}
 	StudentList["xiaoming"] = &s
 }
 
 type Student struct {
-	Name string
-	Grade string
-	Class string
+	Name   string `json: "name"`
+	Gender string `json: "gender"`
+	Age    int8 `json: "age"`
 }
 
 // 添加学生

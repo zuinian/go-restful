@@ -14,8 +14,8 @@ func init() {
 }
 
 type Associate struct {
-	SchoolName string
-	StudentName string
+	SchoolName string `json:"schoolName"`
+	StudentName string `json:"studentName"`
 }
 
 // 添加学生关系

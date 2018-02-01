@@ -15,16 +15,15 @@ func init() {
 
 
 type School struct {
-	Name string
-	Address string
-	Phone string
+	Name string `json:"name"`
+	Address string `json:"address"`
+	Phone string `json:"phone"`
 }
 
-func AddSchool(s School) string {
+func SchoolPost(s School) {
 	SchoolList[s.Name] = &s
-	return s.Name
 }
 
-func GetAllSchools() map[string]*School {
+func SchoolsGet() map[string]*School {
 	return SchoolList
 }

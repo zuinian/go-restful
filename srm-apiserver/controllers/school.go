@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"net/http"
 	"github.com/astaxie/beego"
 	"srm/srm-apiserver/models"
 	"encoding/json"
@@ -11,20 +12,33 @@ type SchoolController struct {
 	beego.Controller
 }
 
+type ResponseError struct {
+	Message string `json:"message"`
+	Code int `json:"code"`
+}
+
 // 注册学校
 // @router / [post]
 func (s *SchoolController) Post() {
 	var school models.School
-	json.Unmarshal(s.Ctx.Input.RequestBody, &school)
-	sName := models.AddSchool(school)
-	s.Data["json"] = map[string]string{"sName": sName}
-	s.ServeJSON()
+	err := json.Unmarshal(s.Ctx.Input.RequestBody, &school)
+	if err != nil {
+		s.Data["json"] = ResponseError{"Invaild parameter param", 400,}
+		s.Ctx.ResponseWriter.WriteHeader(http.StatusBadRequest)
+		s.ServeJSON()
+		return
+	}
+	models.SchoolPost(school)
 }
 
 // 查询所有学校
 // @router / [get]
 func (s *SchoolController) GetAll() {
-	schools := models.GetAllSchools()
+	schoolsMap := models.SchoolsGet()
+	schools := make([]*models.School, 0)
+	for k,_ := range schoolsMap {
+		schools = append(schools, schoolsMap[k])
+	}
 	s.Data["json"] = schools
 	s.ServeJSON()
 }
@@ -33,7 +47,13 @@ func (s *SchoolController) GetAll() {
 // @router /:schoolName/students [get]
 func (s *SchoolController) StudentsBySchoolGet() {
 	schoolName := s.GetString(":schoolName")
-	students := models.AssociateBySchoolGet(schoolName)
+	associateMap := models.AssociateBySchoolGet(schoolName)
+	studentMap := models.StudentsAllGet()
+	// 遍历学生姓名获取详细信息
+	students := make([]models.Student, 0)
+	for studentName, _ := range associateMap {
+		students = append(students, *studentMap[studentName])
+	}
 	s.Data["json"] = students
 	s.ServeJSON()
 }

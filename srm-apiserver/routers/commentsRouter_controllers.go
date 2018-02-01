@@ -119,22 +119,6 @@ func init() {
 			MethodParams: param.Make(),
 			Params: nil})
 
-	beego.GlobalControllerRouter["srm/srm-apiserver/controllers:StudentController"] = append(beego.GlobalControllerRouter["srm/srm-apiserver/controllers:StudentController"],
-		beego.ControllerComments{
-			Method: "Post",
-			Router: `/`,
-			AllowHTTPMethods: []string{"post"},
-			MethodParams: param.Make(),
-			Params: nil})
-
-	beego.GlobalControllerRouter["srm/srm-apiserver/controllers:StudentController"] = append(beego.GlobalControllerRouter["srm/srm-apiserver/controllers:StudentController"],
-		beego.ControllerComments{
-			Method: "GetAll",
-			Router: `/`,
-			AllowHTTPMethods: []string{"get"},
-			MethodParams: param.Make(),
-			Params: nil})
-
 	beego.GlobalControllerRouter["srm/srm-apiserver/controllers:UserController"] = append(beego.GlobalControllerRouter["srm/srm-apiserver/controllers:UserController"],
 		beego.ControllerComments{
 			Method: "Post",
