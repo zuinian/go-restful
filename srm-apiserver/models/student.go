@@ -28,8 +28,8 @@ func StudentsAllGet() map[string]*Student {
 }
 
 // 查询指定学生
-func StudentGet(studentName string) Student {
-	return *StudentList[studentName]
+func StudentGet(studentName string) *Student {
+	return StudentList[studentName]
 }
 
 // 变更学生信息
@@ -49,4 +49,3 @@ func StudentDelete(studentName string) bool {
 	delete(StudentList, studentName)
 	return true
 }
-

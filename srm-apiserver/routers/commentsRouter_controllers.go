@@ -7,6 +7,14 @@ import (
 
 func init() {
 
+	beego.GlobalControllerRouter["srm/srm-apiserver/controllers:AssociateController"] = append(beego.GlobalControllerRouter["srm/srm-apiserver/controllers:AssociateController"],
+		beego.ControllerComments{
+			Method: "Put",
+			Router: `/`,
+			AllowHTTPMethods: []string{"Put"},
+			MethodParams: param.Make(),
+			Params: nil})
+
 	beego.GlobalControllerRouter["srm/srm-apiserver/controllers:ObjectController"] = append(beego.GlobalControllerRouter["srm/srm-apiserver/controllers:ObjectController"],
 		beego.ControllerComments{
 			Method: "Post",
@@ -73,49 +81,41 @@ func init() {
 
 	beego.GlobalControllerRouter["srm/srm-apiserver/controllers:SchoolController"] = append(beego.GlobalControllerRouter["srm/srm-apiserver/controllers:SchoolController"],
 		beego.ControllerComments{
-			Method: "StudentPost",
-			Router: `/:schoolName/students`,
+			Method: "Associate",
+			Router: `/associate`,
+			AllowHTTPMethods: []string{"get"},
+			MethodParams: param.Make(),
+			Params: nil})
+
+	beego.GlobalControllerRouter["srm/srm-apiserver/controllers:StudentController"] = append(beego.GlobalControllerRouter["srm/srm-apiserver/controllers:StudentController"],
+		beego.ControllerComments{
+			Method: "Post",
+			Router: `/`,
 			AllowHTTPMethods: []string{"post"},
 			MethodParams: param.Make(),
 			Params: nil})
 
-	beego.GlobalControllerRouter["srm/srm-apiserver/controllers:SchoolController"] = append(beego.GlobalControllerRouter["srm/srm-apiserver/controllers:SchoolController"],
+	beego.GlobalControllerRouter["srm/srm-apiserver/controllers:StudentController"] = append(beego.GlobalControllerRouter["srm/srm-apiserver/controllers:StudentController"],
 		beego.ControllerComments{
-			Method: "StudentPut",
-			Router: `/:schoolName/students/:studentName`,
+			Method: "Put",
+			Router: `/:studentName`,
 			AllowHTTPMethods: []string{"put"},
 			MethodParams: param.Make(),
 			Params: nil})
 
-	beego.GlobalControllerRouter["srm/srm-apiserver/controllers:SchoolController"] = append(beego.GlobalControllerRouter["srm/srm-apiserver/controllers:SchoolController"],
+	beego.GlobalControllerRouter["srm/srm-apiserver/controllers:StudentController"] = append(beego.GlobalControllerRouter["srm/srm-apiserver/controllers:StudentController"],
 		beego.ControllerComments{
 			Method: "StudentGet",
-			Router: `/:schoolName/students/:studentName`,
+			Router: `/:studentName`,
 			AllowHTTPMethods: []string{"Get"},
 			MethodParams: param.Make(),
 			Params: nil})
 
-	beego.GlobalControllerRouter["srm/srm-apiserver/controllers:SchoolController"] = append(beego.GlobalControllerRouter["srm/srm-apiserver/controllers:SchoolController"],
+	beego.GlobalControllerRouter["srm/srm-apiserver/controllers:StudentController"] = append(beego.GlobalControllerRouter["srm/srm-apiserver/controllers:StudentController"],
 		beego.ControllerComments{
 			Method: "StudentDelete",
-			Router: `/:schoolName/students/:studentName`,
+			Router: `/:studentName`,
 			AllowHTTPMethods: []string{"Delete"},
-			MethodParams: param.Make(),
-			Params: nil})
-
-	beego.GlobalControllerRouter["srm/srm-apiserver/controllers:SchoolController"] = append(beego.GlobalControllerRouter["srm/srm-apiserver/controllers:SchoolController"],
-		beego.ControllerComments{
-			Method: "StudentTransfer",
-			Router: `/:schoolNameOld/students/:studentName/:schoolNameNew`,
-			AllowHTTPMethods: []string{"Put"},
-			MethodParams: param.Make(),
-			Params: nil})
-
-	beego.GlobalControllerRouter["srm/srm-apiserver/controllers:SchoolController"] = append(beego.GlobalControllerRouter["srm/srm-apiserver/controllers:SchoolController"],
-		beego.ControllerComments{
-			Method: "Associate",
-			Router: `/associate`,
-			AllowHTTPMethods: []string{"get"},
 			MethodParams: param.Make(),
 			Params: nil})
 

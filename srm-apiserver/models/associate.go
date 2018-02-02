@@ -1,5 +1,7 @@
 package models
 
+import "fmt"
+
 var (
 	associateList map[string]map[string]bool
 )
@@ -7,8 +9,7 @@ var (
 func init() {
 	associateList = make(map[string]map[string]bool)
 	a := Associate{"xiada","xiaoming"}
-	associateList[a.SchoolName] = make(map[string]bool)
-	associateList[a.SchoolName][a.StudentName] = true
+	AssociateAdd(a)
 
 	associateList["fuda"] = make(map[string]bool)
 }
@@ -18,7 +19,7 @@ type Associate struct {
 	StudentName string `json:"studentName"`
 }
 
-// 添加学生关系
+// 学籍添加
 func AssociateAdd(a Associate) bool {
 	if (associateList[a.SchoolName] == nil) {
 		associateList[a.SchoolName] = make(map[string]bool)
@@ -27,12 +28,16 @@ func AssociateAdd(a Associate) bool {
 	return true
 }
 
-// 查询所有关系
+// 学籍查询--全部
 func AssociateAllGet() map[string]map[string]bool {
 	return associateList
 }
 
-// 查询某个学校是否有某个学生
+// 学籍查询-某个学校
+func AssociateBySchoolGet(schoolName string) map[string]bool {
+	return associateList[schoolName]
+}
+// 学籍查询判断-某个学校是否有某个学生
 func AssociateExist(schoolName string, studentName string) bool {
 	if associateList[schoolName] != nil && associateList[schoolName][studentName] {
 		return true
@@ -40,28 +45,35 @@ func AssociateExist(schoolName string, studentName string) bool {
 	return false
 }
 
-// 查询某个学校的所有学生
-func AssociateBySchoolGet(schoolName string) map[string]bool {
-	return associateList[schoolName]
-}
-
-// 删除某个学生
-func AssociateDelete(schoolName string, studentName string) bool {
-	if associateList[schoolName] != nil && associateList[schoolName][studentName] {
-		delete(associateList[schoolName], studentName)
-		return true
-	}
-	return false
-}
-
-// 转学
-func AssociateTranser(schoolNameOld string, schoolNameNew string, studentName string) bool {
-	if associateList[schoolNameOld] != nil && associateList[schoolNameOld][studentName] {
-		if associateList[schoolNameNew] != nil {
-			delete(associateList[schoolNameOld], studentName)
-			a := Associate{schoolNameNew, studentName}
-			return AssociateAdd(a)
+// 学籍删除
+func AssociateDelete(studentName string) bool {
+	for schoolName, _ := range associateList {
+		if associateList[schoolName][studentName] == true {
+			delete(associateList[schoolName], studentName)
+			return true
 		}
 	}
+
 	return false
+}
+
+// 学籍修改-转学
+func AssociatePut(a Associate) bool {
+	// 先获取旧学校
+	schoolNameOld := ""
+	for schoolName, _ := range associateList {
+		if associateList[schoolName][a.StudentName] == true {
+			schoolNameOld = schoolName
+			break
+		}
+	}
+	fmt.Print("ddd")
+	fmt.Print(schoolNameOld)
+	if (schoolNameOld == "" || schoolNameOld == a.SchoolName) {
+		return false
+	}
+
+	// 变更学籍信息-删除旧的再添加新的就好了
+	delete(associateList[schoolNameOld], a.StudentName)
+	return AssociateAdd(a)
 }
