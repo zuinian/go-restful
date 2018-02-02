@@ -54,11 +54,3 @@ func (s *SchoolController) StudentsBySchoolGet() {
 	s.Data["json"] = students
 	s.ServeJSON()
 }
-
-// 查询学籍
-// @router /associate [get]
-func (s *SchoolController) Associate() {
-	associate := models.AssociateAllGet()
-	s.Data["json"] = associate
-	s.ServeJSON()
-}

@@ -12,7 +12,6 @@ type AssociateController struct {
 }
 
 // 学籍修改-转学
-// @router / [Put]
 func (a *AssociateController) Put() {
 	// 获取参数
 	var associate models.Associate
