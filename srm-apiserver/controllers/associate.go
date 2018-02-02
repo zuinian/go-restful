@@ -5,7 +5,6 @@ import (
 	"github.com/astaxie/beego"
 	"srm/srm-apiserver/models"
 	"encoding/json"
-	"fmt"
 )
 
 type AssociateController struct {
@@ -24,8 +23,7 @@ func (a *AssociateController) Put() {
 		a.ServeJSON()
 		return
 	}
-
-	fmt.Print(associate)
+	// 修改学籍
 	ok := models.AssociatePut(associate)
 	if !ok {
 		a.Data["json"] = ResponseError{"转学失败，学生或者学校信息有误", 400,}

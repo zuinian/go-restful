@@ -18,7 +18,6 @@ type ResponseError struct {
 }
 
 // 注册学校
-// @router / [post]
 func (s *SchoolController) Post() {
 	var school models.School
 	err := json.Unmarshal(s.Ctx.Input.RequestBody, &school)
@@ -32,7 +31,6 @@ func (s *SchoolController) Post() {
 }
 
 // 查询所有学校
-// @router / [get]
 func (s *SchoolController) GetAll() {
 	schoolsMap := models.SchoolsGet()
 	schools := make([]*models.School, 0)
@@ -44,7 +42,6 @@ func (s *SchoolController) GetAll() {
 }
 
 // 查询某个学校所有学生
-// @router /:schoolName/students [get]
 func (s *SchoolController) StudentsBySchoolGet() {
 	schoolName := s.GetString(":schoolName")
 	associateMap := models.AssociateBySchoolGet(schoolName)

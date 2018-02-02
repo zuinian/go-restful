@@ -13,7 +13,6 @@ type StudentController struct {
 }
 
 // 添加学生
-// @router / [post]
 func (s *StudentController) Post() {
 	// 获取学生信息
 	var student models.Student
@@ -37,7 +36,6 @@ func (s *StudentController) Post() {
 }
 
 // 变更学生信息
-// @router /:studentName [put]
 func (s *StudentController) Put() {
 	// studentName := s.GetString(":studentName")
 	// 获取学生信息
@@ -60,8 +58,7 @@ func (s *StudentController) Put() {
 }
 
 // 查询指定学生
-// @router /:studentName [Get]
-func (s *StudentController) StudentGet() {
+func (s *StudentController) Get() {
 	studentName := s.GetString(":studentName")
 	student := models.StudentGet(studentName)
 	if student == nil {
@@ -75,8 +72,7 @@ func (s *StudentController) StudentGet() {
 }
 
 // 删除某个学生
-// @router /:studentName [Delete]
-func (s *StudentController) StudentDelete() {
+func (s *StudentController) Delete() {
 	studentName := s.GetString(":studentName")
 
 	// 删除学生信息
